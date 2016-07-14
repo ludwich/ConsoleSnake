@@ -9,11 +9,16 @@ namespace ConsoleSnake
     /// <summary>
     /// Denna klass ansvara för all ritning till skärmen
     /// </summary>
-    class ScreenManager
+    internal class ScreenManager
     {
-        void Draw(Snake snake, Food food)
+        internal void Draw(Snake snake, Food food)
         {
+            Console.Write("Snake flyttar {0} ", snake.Direction.ToString());
+        }
 
+        internal void Clear()
+        {
+            Console.Clear();
         }
     }
 }
