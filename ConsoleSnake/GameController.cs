@@ -35,12 +35,14 @@ namespace ConsoleSnake
                     if (key == ConsoleKey.UpArrow)
                     {
                         _snake.Direction = 1;
+                        _snake.YPostion--; 
                     }
                     else if (key == ConsoleKey.DownArrow)
                     {
                         _snake.Direction = 2;
+                        _snake.YPostion++;
                     }
-                    else if (key == ConsoleKey.Spacebar)
+                    else if (key == ConsoleKey.Spacebar) //Här borde man kunna bryta ut på ett bättre sätt ...
                     {
                         _running = false;
                         Pause();
