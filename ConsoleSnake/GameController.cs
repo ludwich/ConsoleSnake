@@ -13,7 +13,6 @@ namespace ConsoleSnake
     /// </summary>
     class GameController
     {
-
         bool _running = false;
         ScreenManager _screenManager;
         Snake _snake;
@@ -24,6 +23,7 @@ namespace ConsoleSnake
             _snake = new Snake();
         }
 
+        // Här borde man kunna bryta loopen och hantera loopen på ett bättre och tydligare sätt ...
         void Loop()
         {
             while (_running)
@@ -42,7 +42,7 @@ namespace ConsoleSnake
                         _snake.Direction = 2;
                         _snake.YPostion++;
                     }
-                    else if (key == ConsoleKey.Spacebar) //Här borde man kunna bryta ut på ett bättre sätt ...
+                    else if (key == ConsoleKey.Spacebar)
                     {
                         _running = false;
                         Pause();
