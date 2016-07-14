@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 
 namespace ConsoleSnake
 {
-    class Program
+    /// <summary>
+    /// Denna klass ansvara för all ritning till skärmen
+    /// </summary>
+    class ScreenManager
     {
-        static void Main(string[] args)
+        void Draw(Snake snake, Food food)
         {
-            // Här skall vi ta emot input och sedan göra kall in till GameController
+
         }
     }
 }
