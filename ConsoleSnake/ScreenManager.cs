@@ -9,11 +9,44 @@ namespace ConsoleSnake
     /// <summary>
     /// Denna klass ansvara för all ritning till skärmen
     /// </summary>
-    class ScreenManager
+    internal class ScreenManager
     {
-        void Draw(Snake snake, Food food)
+        int numberOfLines = 22;
+        int numberOfComluns = 22;
+        internal void Draw(Snake snake, Food food)
         {
+            Console.SetCursorPosition(0, 0);
 
+            for (int lineIndex = 0; lineIndex <= numberOfLines; lineIndex++)
+            {
+                for (int columnIndex = 0; columnIndex <= numberOfComluns; columnIndex++)
+                {
+                    
+                    if(lineIndex == 0 || lineIndex == 22)
+                    {
+                        Console.Write("-");
+                    }
+                    else if(columnIndex == 0 || columnIndex == 22)
+                    {
+                        Console.Write("|");
+                    }
+                    else
+                    {
+                        Console.Write("o");
+                    }
+                   
+                }
+
+                Console.Write(Environment.NewLine);
+            }
+            // Här kommer man behöva vara smart ... Det kommer inte blir enkelt att rita detta när man bara kan rita i ett lager ...
+            //Console.Write("Snake flyttar {0} ", snake.Direction.ToString());
+        }
+
+       
+        internal void Clear()
+        {
+            Console.Clear();
         }
     }
 }

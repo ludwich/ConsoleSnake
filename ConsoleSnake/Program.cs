@@ -10,7 +10,8 @@ namespace ConsoleSnake
     {
         static void Main(string[] args)
         {
-            // Här skall vi ta emot input och sedan göra kall in till GameController
+            GameController controller = new GameController();
+            controller.Run();
         }
     }
 }

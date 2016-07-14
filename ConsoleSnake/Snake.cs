@@ -2,7 +2,8 @@
 {
     internal class Snake
     {
-        int _xpos;
-        int _ypos;
+        public int Direction = 0;
+        public int XPosition = 0;
+        public int YPostion = 0;
     }
 }
