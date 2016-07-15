@@ -58,9 +58,10 @@ namespace ConsoleSnake
             }
         }
 
+        // Denna kanske skulle kunna ligga inne i grid-klassen?
         private void CheckGridCollision()
         {
-            if (_snake.XPosition < 0 || _snake.XPosition > 22 || _snake.YPostion < 0 || _snake.YPostion > 22)
+            if (_snake.XPosition < Grid.MinX || _snake.XPosition > Grid.MaxX || _snake.YPostion < Grid.MinY || _snake.YPostion > Grid.MaxY)
             {
                 _running = false;
                 _screenManager.GameOver();
