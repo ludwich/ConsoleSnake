@@ -10,6 +10,8 @@ namespace ConsoleSnake
         
         int numberOfLines = 22;
         int numberOfComluns = 22;
+      
+            
         internal void Draw(Snake snake, Food food)
         {
             Console.SetCursorPosition(0, 0);
@@ -32,6 +34,10 @@ namespace ConsoleSnake
                     else if(snake.XPosition == lineIndex && snake.YPostion == columnIndex)
                     {
                         Console.Write("X");
+                    }
+                    else if (food.XPosition == lineIndex && food.YPostion == columnIndex)
+                    {
+                        Console.Write("F");
                     }
                     else
                     {

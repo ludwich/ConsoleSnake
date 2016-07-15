@@ -14,11 +14,13 @@ namespace ConsoleSnake
         bool _running = false;
         ScreenManager _screenManager;
         Snake _snake;
+        Food _food;
 
         public GameController()
         {
             _screenManager = new ScreenManager();
             _snake = new Snake();
+            _food = new Food();
         }
 
         // Här borde man kunna bryta loopen och hantera loopen på ett bättre och tydligare sätt ...
@@ -47,13 +49,15 @@ namespace ConsoleSnake
                             _snake.Direction = Direction.Left;
                             break;
                     }
-                    //}
+                    
                 }
 
 
                 MoveSnake();
                 CheckGridCollision();
-                _screenManager.Draw(_snake, new Food());
+               
+                
+                _screenManager.Draw(_snake, _food);
                 Thread.Sleep(_speed);
             }
         }
@@ -75,7 +79,7 @@ namespace ConsoleSnake
             {
                 _snake.YPostion++;
             }
-            else if (_snake.Direction == Direction.Left)
+            else if (_snake.Direction == Direction.Left) 
             {
                 _snake.YPostion--;
             }
@@ -87,6 +91,7 @@ namespace ConsoleSnake
             {
                 _snake.XPosition++;
             }
+           
         }
 
         internal void Pause()
