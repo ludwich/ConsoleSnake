@@ -16,7 +16,14 @@ namespace ConsoleSnake
  
 
 
-
+        public void MakeNewFood()
+        {
+            Random y = new Random();
+            YPostion = y.Next(1, 22);
+            Random x = new Random();
+            XPosition = x.Next(1, 22);
+            isFoodThere = true;
+        }
 
 
 

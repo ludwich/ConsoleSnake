@@ -55,12 +55,28 @@ namespace ConsoleSnake
 
                 MoveSnake();
                 CheckGridCollision();
+                CheckFoodCollision();
                
-                
                 _screenManager.Draw(_snake, _food);
                 Thread.Sleep(_speed);
+                
+                
+                             
+
+
             }
         }
+        private void CheckFoodCollision()
+        {
+            if (_snake.XPosition == _food.XPosition && _snake.YPostion == _food.YPostion)
+            {
+                _food.isFoodThere = false;
+                
+            }
+                
+            
+        }
+
 
         // Denna kanske skulle kunna ligga inne i grid-klassen?
         private void CheckGridCollision()
