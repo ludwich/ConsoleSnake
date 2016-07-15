@@ -56,5 +56,12 @@ namespace ConsoleSnake
         {
             Console.Clear();
         }
+
+        public void GameOver()
+        {
+            
+            Console.WriteLine(" High-Score");
+
+        }
     }
 }

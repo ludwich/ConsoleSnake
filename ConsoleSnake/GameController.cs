@@ -53,7 +53,11 @@ namespace ConsoleSnake
                         }
                     //}
                 }
-
+                if (_snake.XPosition < 0 || _snake.XPosition > 22 || _snake.YPostion < 0 || _snake.YPostion > 22)
+                {
+                    _screenManager.GameOver();
+                }
+                    
                 MoveSnake();
                 _screenManager.Draw(_snake, new Food());
                 Thread.Sleep(_speed);
@@ -109,6 +113,11 @@ namespace ConsoleSnake
 
             // Tills ovan är på plats så kör vi bara
             Run();
+        }
+
+        public void ChrashCheck()
+        {
+
         }
     }
 }
