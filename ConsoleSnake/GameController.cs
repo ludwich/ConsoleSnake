@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 
 namespace ConsoleSnake
 {
+    
     /// <summary>
     /// Klassen skall köra loopen. Den skall kunna pausas och avslutas. 
     /// Det är också denna som sedan skall aktivera omritning av skärmen  
     /// </summary>
     class GameController
     {
+        
         bool _running = false;
         ScreenManager _screenManager;
         Snake _snake;
@@ -26,31 +28,57 @@ namespace ConsoleSnake
         // Här borde man kunna bryta loopen och hantera loopen på ett bättre och tydligare sätt ...
         void Loop()
         {
+            Console.BackgroundColor = ConsoleColor.Blue;
             while (_running)
             {
-                if (Console.KeyAvailable)
+                ConsoleKeyInfo keyInfo;
+                while ((keyInfo = Console.ReadKey(true)).Key != ConsoleKey.Escape)
+
                 {
-                    ConsoleKey key = Console.ReadKey(false).Key;
 
-                    if (key == ConsoleKey.UpArrow)
+                    switch (keyInfo.Key)
+
                     {
-                        _snake.Direction = 1;
-                        _snake.YPostion--; 
+
+                        case ConsoleKey.UpArrow:
+
+                            _snake.Direction = 1;
+                            _snake.YPostion--;
+
+                            break;
+
+
+
+                        case ConsoleKey.RightArrow:
+
+                            // MoveHero(1, 0);
+
+                            break;
+
+
+
+                        case ConsoleKey.DownArrow:
+
+                            //  MoveHero(0, 1);
+
+                            break;
+
+
+
+                        case ConsoleKey.LeftArrow:
+
+                            //MoveHero(-1, 0);
+
+                            break;
+
+
+
+
                     }
-                    else if (key == ConsoleKey.DownArrow)
-                    {
-                        _snake.Direction = 2;
-                        _snake.YPostion++;
-                    }
-                    else if (key == ConsoleKey.Spacebar)
-                    {
-                        _running = false;
-                        Pause();
-                    }
+
+                    _screenManager.Draw(_snake, new Food());
+                    Thread.Sleep(500);
                 }
-
-                _screenManager.Draw(_snake, new Food());
-                Thread.Sleep(500);
             }
         }
 
