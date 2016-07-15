@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace ConsoleSnake
 {
-    
+
     /// <summary>
     /// Klassen skall köra loopen. Den skall kunna pausas och avslutas. 
     /// Det är också denna som sedan skall aktivera omritning av skärmen  
     /// </summary>
     class GameController
     {
-        
+        const int _speed = 350;
         bool _running = false;
         ScreenManager _screenManager;
         Snake _snake;
@@ -31,54 +31,53 @@ namespace ConsoleSnake
             Console.BackgroundColor = ConsoleColor.Blue;
             while (_running)
             {
-                ConsoleKeyInfo keyInfo;
-                while ((keyInfo = Console.ReadKey(true)).Key != ConsoleKey.Escape)
-
+                if (Console.KeyAvailable)
                 {
-
-                    switch (keyInfo.Key)
-
-                    {
-
-                        case ConsoleKey.UpArrow:
-
-                            _snake.Direction = 1;
-                            _snake.YPostion--;
-
-                            break;
-
-
-
-                        case ConsoleKey.RightArrow:
-
-                            // MoveHero(1, 0);
-
-                            break;
-
-
-
-                        case ConsoleKey.DownArrow:
-
-                            //  MoveHero(0, 1);
-
-                            break;
-
-
-
-                        case ConsoleKey.LeftArrow:
-
-                            //MoveHero(-1, 0);
-
-                            break;
-
-
-
-
-                    }
-
-                    _screenManager.Draw(_snake, new Food());
-                    Thread.Sleep(500);
+                    ConsoleKeyInfo keyInfo = keyInfo = Console.ReadKey(true);
+                    //while ((keyInfo = Console.ReadKey(true)).Key != ConsoleKey.Escape)
+                    //{
+                        switch (keyInfo.Key)
+                        {
+                            case ConsoleKey.UpArrow:
+                                _snake.Direction = Direction.Up;
+                                break;
+                            case ConsoleKey.RightArrow:
+                                _snake.Direction = Direction.Right;
+                                break;
+                            case ConsoleKey.DownArrow:
+                                _snake.Direction = Direction.Down;
+                                break;
+                            case ConsoleKey.LeftArrow:
+                                _snake.Direction = Direction.Left;
+                                break;
+                        }
+                    //}
                 }
+
+                MoveSnake();
+                _screenManager.Draw(_snake, new Food());
+                Thread.Sleep(_speed);
+            }
+        }
+
+        // Borde kanske hela denna ligga i snake klassen som en MoveSnake?
+        private void MoveSnake()
+        {
+            if (_snake.Direction == Direction.Right)
+            {
+                _snake.XPosition++;
+            }
+            else if (_snake.Direction == Direction.Left)
+            {
+                _snake.XPosition--;
+            }
+            else if (_snake.Direction == Direction.Up)
+            {
+                _snake.YPostion--;
+            }
+            else if (_snake.Direction == Direction.Down)
+            {
+                _snake.YPostion++;
             }
         }
 
@@ -87,10 +86,10 @@ namespace ConsoleSnake
             // Skall visa snygg pauseskärm
 
             Console.Write("Pause. Press Space to start");
- 
+
             do
             {
-               
+
             } while (Console.ReadKey(true).Key != ConsoleKey.Spacebar);
 
             Run();

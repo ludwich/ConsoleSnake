@@ -23,20 +23,25 @@ namespace ConsoleSnake
             {
                 for (int columnIndex = 0; columnIndex <= numberOfComluns; columnIndex++)
                 {
-                    
+                    // Topp och botten-raden är griden
                     if(lineIndex == 0 || lineIndex == 22)
                     {
-                        Console.Write("-");
+                        Console.Write("—");
                     }
+                    // Höger och vänster kolumen är grid
                     else if(columnIndex == 0 || columnIndex == 22)
                     {
                         Console.Write("|");
+                    }
+                    // Om det är maskposition
+                    else if(snake.XPosition == lineIndex && snake.YPostion == columnIndex)
+                    {
+                        Console.Write("X");
                     }
                     else
                     {
                         Console.Write(" ");
                     }
-                   
                 }
 
                 Console.Write(Environment.NewLine);
