@@ -13,7 +13,6 @@ namespace ConsoleSnake
         internal void Draw(Snake snake, Food food)
         {
             Console.SetCursorPosition(0, 0);
-            
 
             for (int lineIndex = 0; lineIndex <= numberOfLines; lineIndex++)
             {
