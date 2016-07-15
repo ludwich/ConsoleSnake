@@ -32,31 +32,38 @@ namespace ConsoleSnake
                     ConsoleKeyInfo keyInfo = keyInfo = Console.ReadKey(true);
                     //while ((keyInfo = Console.ReadKey(true)).Key != ConsoleKey.Escape)
                     //{
-                        switch (keyInfo.Key)
-                        {
-                            case ConsoleKey.UpArrow:
-                                _snake.Direction = Direction.Up;
-                                break;
-                            case ConsoleKey.RightArrow:
-                                _snake.Direction = Direction.Right;
-                                break;
-                            case ConsoleKey.DownArrow:
-                                _snake.Direction = Direction.Down;
-                                break;
-                            case ConsoleKey.LeftArrow:
-                                _snake.Direction = Direction.Left;
-                                break;
-                        }
+                    switch (keyInfo.Key)
+                    {
+                        case ConsoleKey.UpArrow:
+                            _snake.Direction = Direction.Up;
+                            break;
+                        case ConsoleKey.RightArrow:
+                            _snake.Direction = Direction.Right;
+                            break;
+                        case ConsoleKey.DownArrow:
+                            _snake.Direction = Direction.Down;
+                            break;
+                        case ConsoleKey.LeftArrow:
+                            _snake.Direction = Direction.Left;
+                            break;
+                    }
                     //}
                 }
-                if (_snake.XPosition < 0 || _snake.XPosition > 22 || _snake.YPostion < 0 || _snake.YPostion > 22)
-                {
-                    _screenManager.GameOver();
-                }
-                    
+
+
                 MoveSnake();
+                CheckGridCollision();
                 _screenManager.Draw(_snake, new Food());
                 Thread.Sleep(_speed);
+            }
+        }
+
+        private void CheckGridCollision()
+        {
+            if (_snake.XPosition < 0 || _snake.XPosition > 22 || _snake.YPostion < 0 || _snake.YPostion > 22)
+            {
+                _running = false;
+                _screenManager.GameOver();
             }
         }
 

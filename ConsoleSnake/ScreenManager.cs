@@ -58,9 +58,9 @@ namespace ConsoleSnake
 
         public void GameOver()
         {
-            
-            Console.WriteLine(" High-Score");
-
+            Console.Clear();
+            Console.WriteLine("You died!");
+            Console.ReadKey();
         }
     }
 }
