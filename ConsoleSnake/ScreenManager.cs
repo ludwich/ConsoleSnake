@@ -19,7 +19,7 @@ namespace ConsoleSnake
         internal void Draw(Snake snake, Food food)
         {
             Console.SetCursorPosition(30, 10);
-            Console.Write("You have eaten : " +sizeOfTheSnake + " snacks");
+            Console.Write("Score : " +sizeOfTheSnake);
             Console.SetCursorPosition(30, 15);
             Console.Write(snake.XPosition + " är x " + snake.YPostion + " är y");
             
@@ -67,11 +67,7 @@ namespace ConsoleSnake
 
             }
             
-
-            // Här kommer man behöva vara smart ... Det kommer inte blir enkelt att rita detta när man bara kan rita i ett lager ...
-            //Console.Write("Snake flyttar {0} ", snake.Direction.ToString());
-
-            // varför tar vi inte bara bort alla dina ritsaker och lägger en vägg istället och låter markören vara snake ?
+           
         }
 
        
@@ -85,6 +81,40 @@ namespace ConsoleSnake
             Console.Clear();
             Console.WriteLine("You died!");
             Console.ReadKey();
+        }
+
+        public void Pause()
+        {
+
+
+              Console.WriteLine("                    `,:::,.                     ");
+              Console.WriteLine("               `:::::::::::::,                  ");
+              Console.WriteLine("           .;;;;;;;;;;;;;;;;;;;;;:              ");
+              Console.WriteLine("          ;;;;;;;''':,.,:;''';;;;;;`            ");
+              Console.WriteLine("       `;;;;'',..```````````...'';;;;:          ");
+              Console.WriteLine("       ;;;;''..```````````````..,';;;;,         ");
+              Console.WriteLine("    .;;;':.```                ````..'';;;       ");
+              Console.WriteLine("    ;;;''.``                   ````.,';;;`      ");
+              Console.WriteLine("   ;;;',.``                      ```..'';;`     ");
+              Console.WriteLine("  `;;''.``     ::;;:     ;;''';   ```.;';;;     ");
+              Console.WriteLine("  ;;'':.`      :;;;:     ;'''''    ``..'';;     ");
+              Console.WriteLine("  ;;''.``      :;;;;     ;''+''    ```.+';;     ");
+              Console.WriteLine(" :''':.``      ;;'';     ;++#+'     ```.''';    ");
+              Console.WriteLine(" ;''',.``      ;''';     ;+##+'     ```.''''    ");            
+              Console.WriteLine("  '''+.```     '+++'     ;++++'    ```.+'''.    ");
+              Console.WriteLine("  '''',.```    '+++'     ;'++''    ```.+'''     ");
+              Console.WriteLine("  ,'''+.```    ''+''     ;'++';   ```.,''''     ");
+              Console.WriteLine("   '''+..```   '''';     ;'''';   ```.+''',     ");
+              Console.WriteLine("   ''''+.````                    ```.:+'''      ");
+              Console.WriteLine("    '''+:.```                   ```..+''';      ");
+              Console.WriteLine("    ''''+..````                ```..+''''       ");
+              Console.WriteLine("      :''''+,..````````````````..++''''         ");
+              Console.WriteLine("       ;''''++...````````````..:++''''          ");
+              Console.WriteLine("        :''''++'....`````....,++'''''           ");
+              Console.WriteLine("            .''''''''''''''''''';               ");
+              Console.WriteLine("              `''''''''''''''',                 ");
+              Console.WriteLine("                  ;''''''''.                    ");
+                                                                                 
         }
     }
 }

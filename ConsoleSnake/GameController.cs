@@ -119,14 +119,10 @@ namespace ConsoleSnake
         internal void Pause()
         {
             // Skall visa snygg pauseskärm
-
-            Console.Write("Pause. Press Space to start");
-            if (!boolpause)
-            {
-                Console.ReadKey();
+            Console.Clear();
+            _screenManager.Pause();
+            Console.ReadKey(!boolpause);
                 
-                
-            }
             boolpause = false;
             
             Run();
@@ -147,10 +143,6 @@ namespace ConsoleSnake
             // Tills ovan är på plats så kör vi bara
             Run();
         }
-
-        public void ChrashCheck()
-        {
-
-        }
+        
     }
 }
