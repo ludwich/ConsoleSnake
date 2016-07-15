@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace ConsoleSnake
 {
     internal class Snake
