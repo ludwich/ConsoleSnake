@@ -13,10 +13,6 @@ namespace ConsoleSnake
         {
             GameController controller = new GameController();
             controller.Run();
-          
-
-            
-            
         }
     }
 }
