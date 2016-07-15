@@ -15,6 +15,7 @@ namespace ConsoleSnake
         ScreenManager _screenManager;
         Snake _snake;
         Food _food;
+        bool boolpause = false;
 
         public GameController()
         {
@@ -48,9 +49,14 @@ namespace ConsoleSnake
                         case ConsoleKey.LeftArrow:
                             _snake.Direction = Direction.Left;
                             break;
+                        case ConsoleKey.Spacebar:
+                           Pause();
+                            break;
+
                     }
                     
                 }
+                
 
 
                 MoveSnake();
@@ -115,12 +121,14 @@ namespace ConsoleSnake
             // Skall visa snygg pauseskärm
 
             Console.Write("Pause. Press Space to start");
-
-            do
+            if (!boolpause)
             {
-
-            } while (Console.ReadKey(true).Key != ConsoleKey.Spacebar);
-
+                Console.ReadKey();
+                
+                
+            }
+            boolpause = false;
+            
             Run();
         }
 

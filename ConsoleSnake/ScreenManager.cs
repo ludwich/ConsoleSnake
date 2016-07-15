@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ConsoleSnake
 {
@@ -11,11 +12,21 @@ namespace ConsoleSnake
         int numberOfLines = 22;
         int numberOfComluns = 22;
         static int sizeOfTheSnake = 0;
+        
+       
+        
 
         internal void Draw(Snake snake, Food food)
         {
             Console.SetCursorPosition(30, 10);
             Console.Write("You have eaten : " +sizeOfTheSnake + " snacks");
+            Console.SetCursorPosition(30, 15);
+            Console.Write(snake.XPosition + " är x " + snake.YPostion + " är y");
+            
+            
+       
+           
+            
             Console.SetCursorPosition(0, 0);
 
             for (int lineIndex = 0; lineIndex <= numberOfLines; lineIndex++)
@@ -51,7 +62,7 @@ namespace ConsoleSnake
                         Console.Write(" ");
                     }
                 }
-
+                
                 Console.Write(Environment.NewLine);
 
             }

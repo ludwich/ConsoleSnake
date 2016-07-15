@@ -12,6 +12,7 @@ namespace ConsoleSnake
         public Direction Direction = Direction.Right;
         public int XPosition = 10;
         public int YPostion = 10;
+        
     }
 
     // Hut lägger man denna? Borde den ligga i egen klass eller kanske som en del av Snake-klassen? 
