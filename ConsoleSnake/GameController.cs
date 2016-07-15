@@ -65,19 +65,19 @@ namespace ConsoleSnake
         {
             if (_snake.Direction == Direction.Right)
             {
-                _snake.XPosition++;
+                _snake.YPostion++;
             }
             else if (_snake.Direction == Direction.Left)
             {
-                _snake.XPosition--;
+                _snake.YPostion--;
             }
             else if (_snake.Direction == Direction.Up)
             {
-                _snake.YPostion--;
+                _snake.XPosition--;
             }
             else if (_snake.Direction == Direction.Down)
             {
-                _snake.YPostion++;
+                _snake.XPosition++;
             }
         }
 
