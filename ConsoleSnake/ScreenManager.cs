@@ -11,11 +11,13 @@ namespace ConsoleSnake
     /// </summary>
     internal class ScreenManager
     {
+        
         int numberOfLines = 22;
         int numberOfComluns = 22;
         internal void Draw(Snake snake, Food food)
         {
             Console.SetCursorPosition(0, 0);
+            
 
             for (int lineIndex = 0; lineIndex <= numberOfLines; lineIndex++)
             {
@@ -32,15 +34,20 @@ namespace ConsoleSnake
                     }
                     else
                     {
-                        Console.Write("o");
+                        Console.Write(" ");
                     }
                    
                 }
 
                 Console.Write(Environment.NewLine);
+
             }
+            
+
             // Här kommer man behöva vara smart ... Det kommer inte blir enkelt att rita detta när man bara kan rita i ett lager ...
             //Console.Write("Snake flyttar {0} ", snake.Direction.ToString());
+
+            // varför tar vi inte bara bort alla dina ritsaker och lägger en vägg istället och låter markören vara snake ?
         }
 
        
