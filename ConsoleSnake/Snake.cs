@@ -1,14 +1,25 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Net.NetworkInformation;
+using System.Reflection;
 
 namespace ConsoleSnake
 {
     internal class Snake
     {
+
         public Snake()
         {
-            Console.Write(" ");
+         
         }
- 
+
+        
+
+        public void Movement(int x, int y)
+        {
+            
+        }
+     
         public Direction Direction = Direction.Right;
         public int XPosition = 10;
         public int YPostion = 10;

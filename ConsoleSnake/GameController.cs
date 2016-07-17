@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading;
+
 
 namespace ConsoleSnake
 {
@@ -10,18 +13,21 @@ namespace ConsoleSnake
     /// </summary>
     class GameController
     {
-        const int _speed = 350;
+        const int _speed = 150;
         bool _running = false;
         ScreenManager _screenManager;
         Snake _snake;
         Food _food;
         bool boolpause = false;
+        
 
         public GameController()
         {
             _screenManager = new ScreenManager();
             _snake = new Snake();
             _food = new Food();
+
+            
         }
 
         // Här borde man kunna bryta loopen och hantera loopen på ett bättre och tydligare sätt ...
@@ -96,10 +102,14 @@ namespace ConsoleSnake
 
         // Borde kanske hela denna ligga i snake klassen som en MoveSnake?
         private void MoveSnake()
+            
         {
+            
             if (_snake.Direction == Direction.Right)
             {
                 _snake.YPostion++;
+                
+                
             }
             else if (_snake.Direction == Direction.Left) 
             {
