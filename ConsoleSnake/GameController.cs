@@ -14,6 +14,7 @@ namespace ConsoleSnake
         ScreenManager _screenManager;
         Snake _snake;
         Food _food;
+        ScoreKeeper _scoreKeeper;
         bool _isPaused = false;
 
         public GameController()
@@ -21,6 +22,7 @@ namespace ConsoleSnake
             _screenManager = new ScreenManager();
             _snake = new Snake();
             _food = new Food();
+            _scoreKeeper = new ScoreKeeper();
         }
 
         // Här borde man kunna bryta loopen och hantera loopen på ett bättre och tydligare sätt ...
@@ -58,7 +60,7 @@ namespace ConsoleSnake
                 CheckGridCollision();
                 CheckFoodCollision();
 
-                _screenManager.Draw(_snake, _food);
+                _screenManager.Draw(_snake, _food, _scoreKeeper);
                 Thread.Sleep(_speed);
             }
         }
@@ -66,8 +68,9 @@ namespace ConsoleSnake
         {
             if (_snake.HeadPosition.X == _food.XPosition && _snake.HeadPosition.Y == _food.YPostion)
             {
-                _food.isFoodThere = false;
+                _food.MakeNewFood();
                 _snake.Grow();
+                _scoreKeeper.CurrentScore++;
             }
         }
 
@@ -75,7 +78,7 @@ namespace ConsoleSnake
         // Denna kanske skulle kunna ligga inne i grid-klassen?
         private void CheckGridCollision()
         {
-            if (_snake.HeadPosition.X < Grid.MinX || _snake.HeadPosition.X > Grid.MaxX || _snake.HeadPosition.Y < Grid.MinY || _snake.HeadPosition.Y > Grid.MaxY)
+            if (_snake.HeadPosition.X < Grid.StartX || _snake.HeadPosition.X > Grid.EndX || _snake.HeadPosition.Y < Grid.StartY || _snake.HeadPosition.Y > Grid.EndY)
             {
                 _running = false;
                 _screenManager.GameOver();
@@ -90,19 +93,19 @@ namespace ConsoleSnake
 
             if (_snake.Direction == Direction.Right)
             {
-                newPositions.Add(new Position(_snake.HeadPosition.X, _snake.HeadPosition.Y+1));
+                newPositions.Add(new Position(_snake.HeadPosition.X, _snake.HeadPosition.Y + 1));
             }
             else if (_snake.Direction == Direction.Left)
             {
-                newPositions.Add(new Position(_snake.HeadPosition.X, _snake.HeadPosition.Y-1));
+                newPositions.Add(new Position(_snake.HeadPosition.X, _snake.HeadPosition.Y - 1));
             }
             else if (_snake.Direction == Direction.Up)
             {
-                newPositions.Add(new Position(_snake.HeadPosition.X-1, _snake.HeadPosition.Y));
+                newPositions.Add(new Position(_snake.HeadPosition.X - 1, _snake.HeadPosition.Y));
             }
             else if (_snake.Direction == Direction.Down)
             {
-                newPositions.Add(new Position(_snake.HeadPosition.X+1, _snake.HeadPosition.Y));
+                newPositions.Add(new Position(_snake.HeadPosition.X + 1, _snake.HeadPosition.Y));
             }
 
             for (int i = 0; i < _snake.Positions.Count - 1; i++)

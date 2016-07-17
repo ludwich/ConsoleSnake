@@ -7,25 +7,23 @@ namespace ConsoleSnake
         int _numberOfLines = 22;
         int _numberOfComluns = 22;
      
-        internal void Draw(Snake snake, Food food)
+        internal void Draw(Snake snake, Food food, ScoreKeeper scoreKeeper)
         {
-            //Console.SetCursorPosition(30, 10);
-            //Console.Write("Score : " + sizeOfTheSnake);
-            //Console.SetCursorPosition(30, 15);
  
             Console.SetCursorPosition(0, 0);
+            Console.Write("Score : " + scoreKeeper.CurrentScore);
 
             for (int lineIndex = 0; lineIndex <= _numberOfLines; lineIndex++)
             {
                 for (int columnIndex = 0; columnIndex <= _numberOfComluns; columnIndex++)
                 {
                     // Topp och botten-raden är griden
-                    if (lineIndex == 0 || lineIndex == 22)
+                    if (lineIndex == Grid.StartX || lineIndex == Grid.EndX)
                     {
                         Console.Write("—");
                     }
                     // Höger och vänster kolumen är grid
-                    else if (columnIndex == 0 || columnIndex == 22)
+                    else if (columnIndex == Grid.StartY || columnIndex == Grid.EndY)
                     {
                         Console.Write("|");
                     }
@@ -38,20 +36,14 @@ namespace ConsoleSnake
                         // hur menar du att man ska göra det enklare ?=
 
                         Console.Write("X");
-                        
                     }
                     else if(snake.Positions.Exists(p => p.X==lineIndex && p.Y==columnIndex && !p.Equals(snake.Positions[0])))
                     {
                         Console.Write("x");
                     }
-                    else if (food.XPosition == lineIndex && food.YPostion == columnIndex && food.isFoodThere)
+                    else if (food.XPosition == lineIndex && food.YPostion == columnIndex)
                     {
                         Console.Write("F");
-                    }
-                    else if (food.XPosition == lineIndex && food.YPostion == columnIndex && !food.isFoodThere)
-                    {
-                        //sizeOfTheSnake++;
-                        food.MakeNewFood();
                     }
                     else
                     {
@@ -60,12 +52,8 @@ namespace ConsoleSnake
                 }
 
                 Console.Write(Environment.NewLine);
-
             }
-
-
         }
-
 
         internal void Clear()
         {
