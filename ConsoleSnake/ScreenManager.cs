@@ -30,10 +30,7 @@ namespace ConsoleSnake
                     // Om det är maskposition
                     else if (snake.Positions[0].X == lineIndex && snake.Positions[0].Y == columnIndex)
                     {
-                        //Ja men ska vi ens ge oss in med det här ? 
-                        // kollar lite på hur man ska lagra förra pos och det vore nog enklast med en multidim array
-                        // lagar både x och y och sen lagar vi i=0;points>oldBody;i++ och skirver ut på gamla positionen
-                        // hur menar du att man ska göra det enklare ?=
+                   
 
                         Console.Write("X");
                     }

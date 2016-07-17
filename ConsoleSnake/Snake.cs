@@ -29,6 +29,35 @@ namespace ConsoleSnake
         {
             Positions.Add(new Position(Positions.Last().X, Positions.Last().Y));
         }
+        public void MoveSnake()
+
+        {
+            var newPositions = new List<Position>();
+
+            if (Direction == Direction.Right)
+            {
+                newPositions.Add(new Position(HeadPosition.X, HeadPosition.Y + 1));
+            }
+            else if (Direction == Direction.Left)
+            {
+                newPositions.Add(new Position(HeadPosition.X, HeadPosition.Y - 1));
+            }
+            else if (Direction == Direction.Up)
+            {
+                newPositions.Add(new Position(HeadPosition.X - 1, HeadPosition.Y));
+            }
+            else if (Direction == Direction.Down)
+            {
+                newPositions.Add(new Position(HeadPosition.X + 1, HeadPosition.Y));
+            }
+
+            for (int i = 0; i < Positions.Count - 1; i++)
+            {
+                newPositions.Add(Positions[i]);
+            }
+
+            Positions = newPositions;
+        }
     }
     // Hut lägger man denna? Borde den ligga i egen klass eller kanske som en del av Snake-klassen? 
     // Det skulle nog vara snyggare. Det skulle då bli Snake.Direction = 

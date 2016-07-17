@@ -10,24 +10,28 @@ namespace ConsoleSnake
     class GameController
     {
         const int _speed = 150;
-        bool _running = false;
+        public bool _running = false;
         ScreenManager _screenManager;
         Snake _snake;
         Food _food;
         ScoreKeeper _scoreKeeper;
         bool _isPaused = false;
-
+       
         public GameController()
         {
             _screenManager = new ScreenManager();
             _snake = new Snake();
             _food = new Food();
             _scoreKeeper = new ScoreKeeper();
+            
         }
 
         // Här borde man kunna bryta loopen och hantera loopen på ett bättre och tydligare sätt ...
         void Loop()
         {
+            
+
+            Console.Title = "Snake";
             Console.BackgroundColor = ConsoleColor.Blue;
             while (_running)
             {
@@ -55,8 +59,8 @@ namespace ConsoleSnake
                             break;
                     }
                 }
-
-                MoveSnake();
+                _snake.MoveSnake();
+                
                 CheckGridCollision();
                 CheckFoodCollision();
 
@@ -85,36 +89,7 @@ namespace ConsoleSnake
             }
         }
 
-        // Borde kanske hela denna ligga i snake klassen som en MoveSnake?
-        private void MoveSnake()
-
-        {
-            var newPositions = new List<Position>();
-
-            if (_snake.Direction == Direction.Right)
-            {
-                newPositions.Add(new Position(_snake.HeadPosition.X, _snake.HeadPosition.Y + 1));
-            }
-            else if (_snake.Direction == Direction.Left)
-            {
-                newPositions.Add(new Position(_snake.HeadPosition.X, _snake.HeadPosition.Y - 1));
-            }
-            else if (_snake.Direction == Direction.Up)
-            {
-                newPositions.Add(new Position(_snake.HeadPosition.X - 1, _snake.HeadPosition.Y));
-            }
-            else if (_snake.Direction == Direction.Down)
-            {
-                newPositions.Add(new Position(_snake.HeadPosition.X + 1, _snake.HeadPosition.Y));
-            }
-
-            for (int i = 0; i < _snake.Positions.Count - 1; i++)
-            {
-                newPositions.Add(_snake.Positions[i]);
-            }
-
-            _snake.Positions = newPositions;
-        }
+ 
 
         internal void Pause()
         {
