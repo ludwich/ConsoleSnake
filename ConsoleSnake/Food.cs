@@ -13,9 +13,6 @@ namespace ConsoleSnake
         public int YPostion;
         public bool isFoodThere = false;
 
- 
-
-
         public void MakeNewFood()
         {
             Random y = new Random();
@@ -24,8 +21,6 @@ namespace ConsoleSnake
             XPosition = x.Next(1, 22);
             isFoodThere = true;
         }
-
-
 
         public Food()
         {
@@ -47,8 +42,5 @@ namespace ConsoleSnake
         {
             return isFoodThere;
         }
-
-       
-       
     }
 }

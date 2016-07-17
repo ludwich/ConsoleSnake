@@ -46,6 +46,7 @@
     <Compile Include="Food.cs" />
     <Compile Include="GameController.cs" />
     <Compile Include="Grid.cs" />
+    <Compile Include="Positions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScreenManager.cs" />

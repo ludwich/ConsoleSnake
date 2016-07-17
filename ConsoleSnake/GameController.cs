@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 
 namespace ConsoleSnake
 {
-
-    /// <summary>
-    /// Klassen skall köra loopen. Den skall kunna pausas och avslutas. 
-    /// Det är också denna som sedan skall aktivera omritning av skärmen  
-    /// </summary>
     class GameController
     {
         const int _speed = 150;
@@ -18,16 +14,13 @@ namespace ConsoleSnake
         ScreenManager _screenManager;
         Snake _snake;
         Food _food;
-        bool boolpause = false;
-        
+        bool _isPaused = false;
 
         public GameController()
         {
             _screenManager = new ScreenManager();
             _snake = new Snake();
             _food = new Food();
-
-            
         }
 
         // Här borde man kunna bryta loopen och hantera loopen på ett bättre och tydligare sätt ...
@@ -56,44 +49,33 @@ namespace ConsoleSnake
                             _snake.Direction = Direction.Left;
                             break;
                         case ConsoleKey.Spacebar:
-                           Pause();
+                            Pause();
                             break;
-
                     }
-                    
                 }
-                
-
 
                 MoveSnake();
                 CheckGridCollision();
                 CheckFoodCollision();
-               
+
                 _screenManager.Draw(_snake, _food);
                 Thread.Sleep(_speed);
-                
-                
-                             
-
-
             }
         }
         private void CheckFoodCollision()
         {
-            if (_snake.XPosition == _food.XPosition && _snake.YPostion == _food.YPostion)
+            if (_snake.HeadPosition.X == _food.XPosition && _snake.HeadPosition.Y == _food.YPostion)
             {
                 _food.isFoodThere = false;
-                
+                _snake.Grow();
             }
-                
-            
         }
 
 
         // Denna kanske skulle kunna ligga inne i grid-klassen?
         private void CheckGridCollision()
         {
-            if (_snake.XPosition < Grid.MinX || _snake.XPosition > Grid.MaxX || _snake.YPostion < Grid.MinY || _snake.YPostion > Grid.MaxY)
+            if (_snake.HeadPosition.X < Grid.MinX || _snake.HeadPosition.X > Grid.MaxX || _snake.HeadPosition.Y < Grid.MinY || _snake.HeadPosition.Y > Grid.MaxY)
             {
                 _running = false;
                 _screenManager.GameOver();
@@ -102,28 +84,33 @@ namespace ConsoleSnake
 
         // Borde kanske hela denna ligga i snake klassen som en MoveSnake?
         private void MoveSnake()
-            
+
         {
-            
+            var newPositions = new List<Position>();
+
             if (_snake.Direction == Direction.Right)
             {
-                _snake.YPostion++;
-                
-                
+                newPositions.Add(new Position(_snake.HeadPosition.X, _snake.HeadPosition.Y+1));
             }
-            else if (_snake.Direction == Direction.Left) 
+            else if (_snake.Direction == Direction.Left)
             {
-                _snake.YPostion--;
+                newPositions.Add(new Position(_snake.HeadPosition.X, _snake.HeadPosition.Y-1));
             }
             else if (_snake.Direction == Direction.Up)
             {
-                _snake.XPosition--;
+                newPositions.Add(new Position(_snake.HeadPosition.X-1, _snake.HeadPosition.Y));
             }
             else if (_snake.Direction == Direction.Down)
             {
-                _snake.XPosition++;
+                newPositions.Add(new Position(_snake.HeadPosition.X+1, _snake.HeadPosition.Y));
             }
-           
+
+            for (int i = 0; i < _snake.Positions.Count - 1; i++)
+            {
+                newPositions.Add(_snake.Positions[i]);
+            }
+
+            _snake.Positions = newPositions;
         }
 
         internal void Pause()
@@ -131,10 +118,10 @@ namespace ConsoleSnake
             // Skall visa snygg pauseskärm
             Console.Clear();
             _screenManager.Pause();
-            Console.ReadKey(!boolpause);
-                
-            boolpause = false;
-            
+            Console.ReadKey(!_isPaused);
+
+            _isPaused = false;
+
             Run();
         }
 
@@ -153,6 +140,6 @@ namespace ConsoleSnake
             // Tills ovan är på plats så kör vi bara
             Run();
         }
-        
+
     }
 }
