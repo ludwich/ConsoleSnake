@@ -12,8 +12,7 @@ namespace ConsoleSnake
  
             Console.SetCursorPosition(0, 0);
             Console.Write("Score : " + scoreKeeper.CurrentScore);
-           
-            
+            Console.Write(Environment.NewLine);
 
             for (int lineIndex = 0; lineIndex <= _numberOfLines; lineIndex++)
             {
