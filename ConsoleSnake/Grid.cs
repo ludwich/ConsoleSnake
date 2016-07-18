@@ -1,6 +1,6 @@
 ﻿namespace ConsoleSnake
 {
-    public class Grid
+    public class Grid 
     {
         public const int EndX = 23;
         public const int EndY = 22;

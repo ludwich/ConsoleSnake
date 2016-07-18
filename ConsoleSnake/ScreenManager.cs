@@ -12,6 +12,8 @@ namespace ConsoleSnake
  
             Console.SetCursorPosition(0, 0);
             Console.Write("Score : " + scoreKeeper.CurrentScore);
+           
+            
 
             for (int lineIndex = 0; lineIndex <= _numberOfLines; lineIndex++)
             {
@@ -60,7 +62,11 @@ namespace ConsoleSnake
         public void GameOver()
         {
             Console.Clear();
+            Console.SetCursorPosition(17, 10);
             Console.WriteLine("You died!");
+            ScoreKeeper.GetAllTimeHighScore();
+            
+            
             Console.ReadKey();
         }
 
