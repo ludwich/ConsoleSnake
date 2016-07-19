@@ -63,11 +63,13 @@ namespace ConsoleSnake
         public void CheckBodyWhenFoodSpawn(int foodX,int foodY)
         {
             var foodPosition = new List<Position>();
-            foodPosition.Add(new Position(foodY, foodX));
+            foodPosition.Add(new Position(foodX, foodY));
             for (int i = 0; i < Positions.Count; i++)
             {
                 if (Positions[i] == foodPosition[0])
                     bodyIsThere = true;
+                else
+                    bodyIsThere = false;
             }
         }
     }
