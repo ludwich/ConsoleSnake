@@ -21,7 +21,7 @@ namespace ConsoleSnake
         {
             _screenManager = new ScreenManager();
             _snake = new Snake();
-            _food = new Food();
+            _food = new Food(_snake);
             _scoreKeeper = new ScoreKeeper();
             
         }
@@ -59,8 +59,9 @@ namespace ConsoleSnake
                             break;
                     }
                 }
+               
                 _snake.MoveSnake();
-                
+                _snake.SnakeOnSnakeCollision();
                 CheckGridCollision();
                 CheckFoodCollision();
                 
@@ -72,7 +73,8 @@ namespace ConsoleSnake
         private void CheckFoodCollision()
         {
             
-            if (_snake.HeadPosition.X == _food.XPosition && _snake.HeadPosition.Y == _food.YPostion || _snake.bodyIsThere )
+            
+            if (_snake.HeadPosition.X == _food.XPosition && _snake.HeadPosition.Y == _food.YPostion)
             {
                 _food.MakeNewFood();
                 _snake.Grow();

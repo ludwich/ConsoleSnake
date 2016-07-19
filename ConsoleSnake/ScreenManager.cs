@@ -41,6 +41,7 @@ namespace ConsoleSnake
                     }
                     else if (food.XPosition == lineIndex && food.YPostion == columnIndex)
                     {
+                       
                         Console.Write("F");
                     }
                     else
