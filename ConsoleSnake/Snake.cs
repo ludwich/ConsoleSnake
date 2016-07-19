@@ -58,6 +58,18 @@ namespace ConsoleSnake
 
             Positions = newPositions;
         }
+        public bool bodyIsThere = false;
+
+        public void CheckBodyWhenFoodSpawn(int foodX,int foodY)
+        {
+            var foodPosition = new List<Position>();
+            foodPosition.Add(new Position(foodY, foodX));
+            for (int i = 0; i < Positions.Count; i++)
+            {
+                if (Positions[i] == foodPosition[0])
+                    bodyIsThere = true;
+            }
+        }
     }
     // Hut lägger man denna? Borde den ligga i egen klass eller kanske som en del av Snake-klassen? 
     // Det skulle nog vara snyggare. Det skulle då bli Snake.Direction = 

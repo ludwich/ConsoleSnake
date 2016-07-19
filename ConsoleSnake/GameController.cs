@@ -63,6 +63,7 @@ namespace ConsoleSnake
                 
                 CheckGridCollision();
                 CheckFoodCollision();
+                
 
                 _screenManager.Draw(_snake, _food, _scoreKeeper);
                 Thread.Sleep(_speed);
@@ -70,7 +71,8 @@ namespace ConsoleSnake
         }
         private void CheckFoodCollision()
         {
-            if (_snake.HeadPosition.X == _food.XPosition && _snake.HeadPosition.Y == _food.YPostion)
+            
+            if (_snake.HeadPosition.X == _food.XPosition && _snake.HeadPosition.Y == _food.YPostion || _snake.bodyIsThere )
             {
                 _food.MakeNewFood();
                 _snake.Grow();
