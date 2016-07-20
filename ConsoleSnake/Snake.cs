@@ -64,7 +64,7 @@ namespace ConsoleSnake
             List<Position> BodyParts = new List<Position>();
             for (int i = 1; i < Positions.Count; i++)
             {
-                if (Positions[i] == Positions[0])
+                if (Positions[0] == Positions[i])
                 {
                     ScreenManager death = new ScreenManager();
                     death.GameOver();

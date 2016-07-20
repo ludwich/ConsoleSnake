@@ -31,8 +31,6 @@ namespace ConsoleSnake
                     // Om det är maskposition
                     else if (snake.Positions[0].X == lineIndex && snake.Positions[0].Y == columnIndex)
                     {
-                   
-
                         Console.Write("X");
                     }
                     else if(snake.Positions.Exists(p => p.X==lineIndex && p.Y==columnIndex && !p.Equals(snake.Positions[0])))

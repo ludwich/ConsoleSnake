@@ -72,7 +72,14 @@ namespace ConsoleSnake
         }
         private void CheckFoodCollision()
         {
-            
+            for (int i = 1; i<_snake.Positions.Count; i++)
+            {
+                if (_snake.Positions[i].X == _food.XPosition && _snake.Positions[i].Y == _food.YPostion)
+                {
+                    _food.MakeNewFood();
+                }
+                  
+            }
             
             if (_snake.HeadPosition.X == _food.XPosition && _snake.HeadPosition.Y == _food.YPostion)
             {
