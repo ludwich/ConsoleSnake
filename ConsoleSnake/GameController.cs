@@ -61,7 +61,7 @@ namespace ConsoleSnake
                 }
                
                 _snake.MoveSnake();
-                _snake.SnakeOnSnakeCollision();
+                SnakeOnSnakeCollision();
                 CheckGridCollision();
                 CheckFoodCollision();
                 
@@ -70,6 +70,17 @@ namespace ConsoleSnake
                 Thread.Sleep(_speed);
             }
         }
+        private void SnakeOnSnakeCollision()
+        {
+            for (int i = 1; i < _snake.Positions.Count; i++)
+            {
+                if (_snake.Positions[i].X == _snake.HeadPosition.X && _snake.Positions[i].Y == _snake.HeadPosition.Y)
+                    _screenManager.GameOver();
+            }
+
+        }
+
+
         private void CheckFoodCollision()
         {
             for (int i = 1; i<_snake.Positions.Count; i++)

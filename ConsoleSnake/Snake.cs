@@ -59,19 +59,7 @@ namespace ConsoleSnake
             Positions = newPositions;
         }
 
-        public void SnakeOnSnakeCollision()
-        {
-            List<Position> BodyParts = new List<Position>();
-            for (int i = 1; i < Positions.Count; i++)
-            {
-                if (Positions[0] == Positions[i])
-                {
-                    ScreenManager death = new ScreenManager();
-                    death.GameOver();
-                }
-            }
-                      
-        }
+       
     
 
 
