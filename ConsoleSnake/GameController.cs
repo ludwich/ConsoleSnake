@@ -21,7 +21,7 @@ namespace ConsoleSnake
         {
             _screenManager = new ScreenManager();
             _snake = new Snake();
-            _food = new Food(_snake);
+            _food = new Food();
             _scoreKeeper = new ScoreKeeper();
             
         }
