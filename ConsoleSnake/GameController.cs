@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-
+using Newtonsoft.Json;
 
 namespace ConsoleSnake
 {
@@ -75,7 +75,11 @@ namespace ConsoleSnake
             for (int i = 1; i < _snake.Positions.Count; i++)
             {
                 if (_snake.Positions[i].X == _snake.HeadPosition.X && _snake.Positions[i].Y == _snake.HeadPosition.Y)
-                    _screenManager.GameOver();
+                {
+                    _screenManager.GameOver(_scoreKeeper.CurrentScore);
+                    _running = false;
+                }
+                    
             }
 
         }
@@ -97,6 +101,7 @@ namespace ConsoleSnake
                 _food.MakeNewFood();
                 _snake.Grow();
                 _scoreKeeper.CurrentScore++;
+                
             }
         }
 
@@ -107,7 +112,7 @@ namespace ConsoleSnake
             if (_snake.HeadPosition.X < Grid.StartX || _snake.HeadPosition.X > Grid.EndX || _snake.HeadPosition.Y < Grid.StartY || _snake.HeadPosition.Y > Grid.EndY)
             {
                 _running = false;
-                _screenManager.GameOver();
+                _screenManager.GameOver(_scoreKeeper.CurrentScore);
             }
         }
 

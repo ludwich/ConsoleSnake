@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace ConsoleSnake
 {
@@ -6,6 +7,7 @@ namespace ConsoleSnake
     {
         int _numberOfLines = 22;
         int _numberOfComluns = 22;
+        HighScore _highScore = new HighScore();
      
         internal void Draw(Snake snake, Food food, ScoreKeeper scoreKeeper)
         {
@@ -57,14 +59,31 @@ namespace ConsoleSnake
             Console.Clear();
         }
 
-        public void GameOver()
+        public void GameOver(int score)
         {
+            
+            Console.Clear();
+            Console.WriteLine("You got " + score + " points");
+            Console.Write("Enter your Name for Highscore : ");
+            string playerName = Console.ReadLine();
+            _highScore.HighScorePoints = score;
+            _highScore.Name = playerName;
+            _highScore.HighScoreRanking = null;
+            
+            _highScore.CheckRankingVsOthers(_highScore);
+            
             Console.Clear();
             Console.SetCursorPosition(17, 10);
             Console.WriteLine("You died!");
-            ScoreKeeper.GetAllTimeHighScore();
-            
-            
+            _highScore.PostHighScoreOnDeath();
+            if (_highScore.HighScoreIsChanged)
+                _highScore.WriteHighScoreToMyJson();
+
+
+            //Denna metod skall användas men inte just nu då jag vill kuna ha olika options om man vill ha filen sparad lokalt istället
+            // ScoreKeeper.GetAllTimeHighScore();
+
+
             Console.ReadKey();
         }
 
