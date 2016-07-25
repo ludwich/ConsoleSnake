@@ -68,7 +68,7 @@ namespace ConsoleSnake
             string playerName = Console.ReadLine();
             _highScore.HighScorePoints = score;
             _highScore.Name = playerName;
-            _highScore.HighScoreRanking = null;
+            _highScore.HighScoreRanking = 0;
             
             _highScore.CheckRankingVsOthers(_highScore);
             
@@ -76,8 +76,7 @@ namespace ConsoleSnake
             Console.SetCursorPosition(17, 10);
             Console.WriteLine("You died!");
             _highScore.PostHighScoreOnDeath();
-            if (_highScore.HighScoreIsChanged)
-                _highScore.WriteHighScoreToMyJson();
+            
 
 
             //Denna metod skall användas men inte just nu då jag vill kuna ha olika options om man vill ha filen sparad lokalt istället
