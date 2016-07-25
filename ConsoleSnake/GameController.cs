@@ -43,16 +43,35 @@ namespace ConsoleSnake
                     switch (keyInfo.Key)
                     {
                         case ConsoleKey.UpArrow:
-                            _snake.Direction = Direction.Up;
+                            if (_snake.Direction == Direction.Down)
+                            {
+                            }
+                            else
+                                _snake.Direction = Direction.Up;
                             break;
                         case ConsoleKey.RightArrow:
-                            _snake.Direction = Direction.Right;
+                            if (_snake.Direction == Direction.Left)
+                            {
+
+                            }
+                            else
+                                _snake.Direction = Direction.Right;
                             break;
                         case ConsoleKey.DownArrow:
-                            _snake.Direction = Direction.Down;
+                            if (_snake.Direction == Direction.Up)
+                            {
+
+                            }
+                            else
+                                _snake.Direction = Direction.Down;
                             break;
                         case ConsoleKey.LeftArrow:
-                            _snake.Direction = Direction.Left;
+                            if (_snake.Direction == Direction.Right)
+                            {
+
+                            }
+                            else
+                                _snake.Direction = Direction.Left;
                             break;
                         case ConsoleKey.Spacebar:
                             Pause();
