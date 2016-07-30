@@ -84,8 +84,8 @@ namespace ConsoleSnake
             {
                 if (_snake.Positions[i].X == _snake.HeadPosition.X && _snake.Positions[i].Y == _snake.HeadPosition.Y)
                 {
-                    GameOver();
                     _running = false;
+                    GameOver();
                 }
             }
         }
@@ -113,7 +113,7 @@ namespace ConsoleSnake
 
         private void CheckGridCollision()
         {
-            if (_snake.HeadPosition.X < Grid.StartX || _snake.HeadPosition.X > Grid.EndX || _snake.HeadPosition.Y < Grid.StartY || _snake.HeadPosition.Y > Grid.EndY)
+            if (_snake.HeadPosition.X <= Grid.StartX || _snake.HeadPosition.X >= Grid.EndX || _snake.HeadPosition.Y <= Grid.StartY || _snake.HeadPosition.Y >= Grid.EndY)
             {
                 _running = false;
                 GameOver();
