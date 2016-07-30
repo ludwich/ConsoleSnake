@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
-using Newtonsoft.Json;
 
 namespace ConsoleSnake
 {
@@ -16,21 +12,17 @@ namespace ConsoleSnake
         Food _food;
         ScoreKeeper _scoreKeeper;
         bool _isPaused = false;
-       
+
         public GameController()
         {
             _screenManager = new ScreenManager();
             _snake = new Snake();
             _food = new Food();
             _scoreKeeper = new ScoreKeeper();
-            
         }
 
-        // Här borde man kunna bryta loopen och hantera loopen på ett bättre och tydligare sätt ...
         void Loop()
         {
-            
-
             Console.Title = "Snake";
             Console.BackgroundColor = ConsoleColor.Blue;
             while (_running)
@@ -43,47 +35,43 @@ namespace ConsoleSnake
                     switch (keyInfo.Key)
                     {
                         case ConsoleKey.UpArrow:
-                            if (_snake.Direction == Direction.Down)
+                            if (_snake.Direction != Direction.Down)
                             {
-                            }
-                            else
                                 _snake.Direction = Direction.Up;
+                            }
+
                             break;
                         case ConsoleKey.RightArrow:
-                            if (_snake.Direction == Direction.Left)
+                            if (_snake.Direction != Direction.Left)
                             {
-
-                            }
-                            else
                                 _snake.Direction = Direction.Right;
+                            }
+
                             break;
                         case ConsoleKey.DownArrow:
-                            if (_snake.Direction == Direction.Up)
+                            if (_snake.Direction != Direction.Up)
                             {
-
-                            }
-                            else
                                 _snake.Direction = Direction.Down;
+                            }
+
                             break;
                         case ConsoleKey.LeftArrow:
-                            if (_snake.Direction == Direction.Right)
+                            if (_snake.Direction != Direction.Right)
                             {
-
-                            }
-                            else
                                 _snake.Direction = Direction.Left;
+                            }
+
                             break;
                         case ConsoleKey.Spacebar:
                             Pause();
                             break;
                     }
                 }
-               
+
                 _snake.MoveSnake();
                 SnakeOnSnakeCollision();
                 CheckGridCollision();
                 CheckFoodCollision();
-                
 
                 _screenManager.Draw(_snake, _food, _scoreKeeper);
                 Thread.Sleep(_speed);
@@ -98,34 +86,30 @@ namespace ConsoleSnake
                     _screenManager.GameOver(_scoreKeeper.CurrentScore);
                     _running = false;
                 }
-                    
             }
-
         }
 
 
         private void CheckFoodCollision()
         {
-            for (int i = 1; i<_snake.Positions.Count; i++)
+            for (int i = 1; i < _snake.Positions.Count; i++)
             {
                 if (_snake.Positions[i].X == _food.XPosition && _snake.Positions[i].Y == _food.YPostion)
                 {
                     _food.MakeNewFood();
                 }
-                  
+
             }
-            
+
             if (_snake.HeadPosition.X == _food.XPosition && _snake.HeadPosition.Y == _food.YPostion)
             {
                 _food.MakeNewFood();
                 _snake.Grow();
                 _scoreKeeper.CurrentScore++;
-                
             }
         }
 
 
-        // Denna kanske skulle kunna ligga inne i grid-klassen?
         private void CheckGridCollision()
         {
             if (_snake.HeadPosition.X < Grid.StartX || _snake.HeadPosition.X > Grid.EndX || _snake.HeadPosition.Y < Grid.StartY || _snake.HeadPosition.Y > Grid.EndY)
@@ -134,8 +118,6 @@ namespace ConsoleSnake
                 _screenManager.GameOver(_scoreKeeper.CurrentScore);
             }
         }
-
- 
 
         internal void Pause()
         {
@@ -164,6 +146,5 @@ namespace ConsoleSnake
             // Tills ovan är på plats så kör vi bara
             Run();
         }
-
     }
 }
