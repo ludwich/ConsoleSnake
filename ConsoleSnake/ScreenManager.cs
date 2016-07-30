@@ -8,10 +8,8 @@ namespace ConsoleSnake
         int _numberOfLines = 22;
         int _numberOfComluns = 22;
         HighScore _highScore = new HighScore();
-     
         internal void Draw(Snake snake, Food food, ScoreKeeper scoreKeeper)
         {
- 
             Console.SetCursorPosition(0, 0);
             Console.Write("Score : " + scoreKeeper.CurrentScore);
             Console.Write(Environment.NewLine);

@@ -2,31 +2,17 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleSnake
 {
     class HighScore
     {
-        public HighScore()
-        {
-
-                
-        }
         public string Name { get; set; }
         public int HighScoreRanking { get; set; }
         public int HighScorePoints { get; set; }
-     
-       
-        
-
         public List<HighScore> HighScoreObj = new List<HighScore>();
         private List<HighScore> RevisedHighScoreObj = new List<HighScore>();
-
-        
         public string inComingJson;
 
         public void BuildNewHighscore()
@@ -64,51 +50,41 @@ namespace ConsoleSnake
             RevisedHighScoreObj.Add(p2);
             RevisedHighScoreObj.Add(p3);
             WriteHighScoreToMyJson();
-
-
         }
-    
+
         public void CheckRankingVsOthers(HighScore _score)
         {
             ReadHighScoreFromMyJson();
-            for (int i=0; i < HighScoreObj.Count; i++)
+            for (int i = 0; i < HighScoreObj.Count; i++)
             {
                 if (_score.HighScorePoints > HighScoreObj[i].HighScorePoints)
                 {
                     _score.HighScoreRanking = HighScoreObj[i].HighScoreRanking;
                     HighScoreObj.Insert(i, _score);
                     HighScoreObj.RemoveAt(3);
-                   
+
                     BuildNewHighscore();
                     break;
                 }
             }
-            
-           
         }
 
         public void ReadHighScoreFromMyJson()
         {
-            
             using (WebClient wc = new WebClient())
             {
                 inComingJson = wc.DownloadString("https://api.myjson.com/bins/n4z5");
                 var highScoreObj = JsonConvert.DeserializeObject<List<HighScore>>(inComingJson);
-                for (int i = 0; i<highScoreObj.Count; i++)
+                for (int i = 0; i < highScoreObj.Count; i++)
                 {
                     HighScoreObj.Add(highScoreObj[i]);
-                  
-                }
-              
-             
-                
-            }
 
+                }
+            }
         }
 
         public void WriteHighScoreToMyJson()
         {
-          
             string json = JsonConvert.SerializeObject(RevisedHighScoreObj);
 
             var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://api.myjson.com/bins/n4z5");
@@ -117,39 +93,30 @@ namespace ConsoleSnake
 
             using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
             {
-
-
                 streamWriter.Write(json);
                 streamWriter.Flush();
                 streamWriter.Close();
             }
 
-           var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-           using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-           {
-              var result = streamReader.ReadToEnd();
-           }
-
+            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            {
+                var result = streamReader.ReadToEnd();
+            }
         }
-
 
         /// <summary>
         /// För att skriva ut highscore vid död
         /// </summary>
         public void PostHighScoreOnDeath()
         {
-            
-            for (int i =0; i<HighScoreObj.Count; i++)
+            for (int i = 0; i < HighScoreObj.Count; i++)
             {
                 Console.SetCursorPosition(15, 15 + i);
                 Console.WriteLine(HighScoreObj[i].HighScoreRanking + ". " + HighScoreObj[i].Name);
                 Console.SetCursorPosition(30, 15 + i);
                 Console.Write("Score : " + HighScoreObj[i].HighScorePoints);
-              
             }
-           
-
-            
         }
     }
 }

@@ -10,10 +10,7 @@ namespace ConsoleSnake
 {
     class ScoreKeeper
     {
-        
         public int CurrentScore = 0;
-        
-      
 
         public static void GetAllTimeHighScore()
         {
@@ -28,19 +25,15 @@ namespace ConsoleSnake
             Console.WriteLine("--HighScore--");
             while ((line = file.ReadLine()) != null)
             {
-                Console.SetCursorPosition(15, 15+counter);
+                Console.SetCursorPosition(15, 15 + counter);
                 Console.WriteLine(line);
                 higscore.Add(line);
                 counter++;
-                
+
             }
 
             file.Close();
-            
-                    
-            
-        }
 
-    
-}
+        }
+    }
 }

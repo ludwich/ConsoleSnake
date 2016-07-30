@@ -58,17 +58,7 @@ namespace ConsoleSnake
 
             Positions = newPositions;
         }
-
-       
-    
-
-
-   
-
-
     }
-    // Hut lägger man denna? Borde den ligga i egen klass eller kanske som en del av Snake-klassen? 
-    // Det skulle nog vara snyggare. Det skulle då bli Snake.Direction = 
     enum Direction
     {
         Right,
