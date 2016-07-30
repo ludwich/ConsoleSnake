@@ -1,22 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
+using ConsoleSnake.Model;
 using Newtonsoft.Json;
 
 namespace ConsoleSnake
 {
     internal class ScreenManager
     {
-        int _numberOfLines = 22;
-        int _numberOfComluns = 22;
-        HighScore _highScore = new HighScore();
+        private const int NumberOfLines = 22;
+        const int NumberOfComluns = 22;
+
         internal void Draw(Snake snake, Food food, ScoreKeeper scoreKeeper)
         {
             Console.SetCursorPosition(0, 0);
             Console.Write("Score : " + scoreKeeper.CurrentScore);
             Console.Write(Environment.NewLine);
 
-            for (int lineIndex = 0; lineIndex <= _numberOfLines; lineIndex++)
+            for (int lineIndex = 0; lineIndex <= NumberOfLines; lineIndex++)
             {
-                for (int columnIndex = 0; columnIndex <= _numberOfComluns; columnIndex++)
+                for (int columnIndex = 0; columnIndex <= NumberOfComluns; columnIndex++)
                 {
                     // Topp och botten-raden är griden
                     if (lineIndex == Grid.StartX || lineIndex == Grid.EndX)
@@ -57,31 +59,16 @@ namespace ConsoleSnake
             Console.Clear();
         }
 
-        public void GameOver(int score)
+        public void ShowGameOver(int score)
         {
             
             Console.Clear();
-            Console.WriteLine("You got " + score + " points");
+            Console.WriteLine("Crash! You got " + score + " points");
+        }
+        public string ReadPlayName()
+        {
             Console.Write("Enter your Name for Highscore : ");
-            string playerName = Console.ReadLine();
-            _highScore.HighScorePoints = score;
-            _highScore.Name = playerName;
-            _highScore.HighScoreRanking = 0;
-            
-            _highScore.CheckRankingVsOthers(_highScore);
-            
-            Console.Clear();
-            Console.SetCursorPosition(17, 10);
-            Console.WriteLine("You died!");
-            _highScore.PostHighScoreOnDeath();
-            
-
-
-            //Denna metod skall användas men inte just nu då jag vill kuna ha olika options om man vill ha filen sparad lokalt istället
-            // ScoreKeeper.GetAllTimeHighScore();
-
-
-            Console.ReadKey();
+            return Console.ReadLine();
         }
 
         public void Pause()
@@ -116,6 +103,17 @@ namespace ConsoleSnake
             Console.WriteLine("              `''''''''''''''',                 ");
             Console.WriteLine("                  ;''''''''.                    ");
 
+        }
+
+        internal void ShowHighScoreList(List<HighScore> list)
+        {
+            foreach (var item in list)
+            {
+                Console.WriteLine(item.Name + "\t" + item.Score);
+            }
+
+            Console.WriteLine("Click to play again");
+            Console.ReadLine();
         }
     }
 }

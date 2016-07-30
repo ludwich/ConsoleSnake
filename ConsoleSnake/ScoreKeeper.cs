@@ -1,39 +1,60 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 using Newtonsoft.Json;
+using System.Net;
+using System.IO;
+using ConsoleSnake.Model;
 
 namespace ConsoleSnake
 {
     class ScoreKeeper
     {
         public int CurrentScore = 0;
-
-        public static void GetAllTimeHighScore()
+        private const string JsonStoreUrl = "https://api.myjson.com/bins/2x7dr";
+        private const int NumberOfSavedScores = 5;
+        public bool IsNewHighScore()
         {
-            int counter = 0;
-            string line;
+            var list = GetHighScores();
+            return list.Min(s => s.Score) < CurrentScore;
+        }
 
-            // Read the file and display it line by line.
-            System.IO.StreamReader file =
-               new System.IO.StreamReader("c:\\test\\Highscore.txt");
-            List<string> higscore = new List<string>();
-            Console.SetCursorPosition(15, 13);
-            Console.WriteLine("--HighScore--");
-            while ((line = file.ReadLine()) != null)
+        public List<HighScore> GetHighScores()
+        {
+            using (WebClient client = new WebClient())
             {
-                Console.SetCursorPosition(15, 15 + counter);
-                Console.WriteLine(line);
-                higscore.Add(line);
-                counter++;
+                var json = client.DownloadString(JsonStoreUrl);
+                var highScores = JsonConvert.DeserializeObject<List<HighScore>>(json);
+                return highScores.OrderByDescending(x => x.Score).Take(NumberOfSavedScores).ToList();
+            }
+        }
 
+        internal void AddNewHighScore(HighScore highScore)
+        {
+            var list = GetHighScores();
+            list.Add(highScore);
+
+            PostHighScores(list);
+        }
+
+        private void PostHighScores(List<HighScore> list)
+        {
+            string json = JsonConvert.SerializeObject(list);
+
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(JsonStoreUrl);
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Method = "PUT";
+
+            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+            {
+                streamWriter.Write(json);
             }
 
-            file.Close();
-
+            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            {
+                var result = streamReader.ReadToEnd();
+            }
         }
     }
 }

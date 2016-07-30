@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Threading;
+using ConsoleSnake.Model;
 
 namespace ConsoleSnake
 {
     class GameController
     {
-        const int _speed = 150;
-        public bool _running = false;
+        const int Speed = 150;
+        private bool _running = false;
         ScreenManager _screenManager;
         Snake _snake;
         Food _food;
@@ -21,7 +22,7 @@ namespace ConsoleSnake
             _scoreKeeper = new ScoreKeeper();
         }
 
-        void Loop()
+        private void Loop()
         {
             Console.Title = "Snake";
             Console.BackgroundColor = ConsoleColor.Blue;
@@ -74,7 +75,7 @@ namespace ConsoleSnake
                 CheckFoodCollision();
 
                 _screenManager.Draw(_snake, _food, _scoreKeeper);
-                Thread.Sleep(_speed);
+                Thread.Sleep(Speed);
             }
         }
         private void SnakeOnSnakeCollision()
@@ -83,7 +84,7 @@ namespace ConsoleSnake
             {
                 if (_snake.Positions[i].X == _snake.HeadPosition.X && _snake.Positions[i].Y == _snake.HeadPosition.Y)
                 {
-                    _screenManager.GameOver(_scoreKeeper.CurrentScore);
+                    GameOver();
                     _running = false;
                 }
             }
@@ -115,11 +116,11 @@ namespace ConsoleSnake
             if (_snake.HeadPosition.X < Grid.StartX || _snake.HeadPosition.X > Grid.EndX || _snake.HeadPosition.Y < Grid.StartY || _snake.HeadPosition.Y > Grid.EndY)
             {
                 _running = false;
-                _screenManager.GameOver(_scoreKeeper.CurrentScore);
+                GameOver();
             }
         }
 
-        internal void Pause()
+        private void Pause()
         {
             // Skall visa snygg pauseskärm
             Console.Clear();
@@ -138,13 +139,25 @@ namespace ConsoleSnake
             Loop();
         }
 
-        internal void Start()
+        private void GameOver()
         {
-            // Här skall vi implemntera en snygg ascii startscreen. Old school style! ;)
-            // Skall finnas någon menu sak där man kan spela eller välja att titta på high score
+            _screenManager.ShowGameOver(_scoreKeeper.CurrentScore);
 
-            // Tills ovan är på plats så kör vi bara
+            if(_scoreKeeper.IsNewHighScore())
+            {
+                var name = _screenManager.ReadPlayName();
+                _scoreKeeper.AddNewHighScore(new HighScore(name, _scoreKeeper.CurrentScore));
+            }
+
+            _screenManager.ShowHighScoreList(_scoreKeeper.GetHighScores());
+            Reset();
             Run();
+        }
+
+        private void Reset()
+        {
+            _snake.ResetPositions();
+            _scoreKeeper.CurrentScore = 0;
         }
     }
 }

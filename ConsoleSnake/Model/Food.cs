@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ConsoleSnake
+namespace ConsoleSnake.Model
 {
     internal class Food
     {
@@ -9,9 +9,9 @@ namespace ConsoleSnake
 
         public void MakeNewFood()
         {
-            Random yRandom = new Random();
+            var yRandom = new Random();
             YPostion = yRandom.Next(Grid.StartY + 1, Grid.EndY - 1);
-            Random xRandom = new Random();
+            var xRandom = new Random();
             XPosition = xRandom.Next(Grid.StartX + 1, Grid.EndX - 1);
         }
 

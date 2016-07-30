@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net.NetworkInformation;
-using System.Reflection;
 
-namespace ConsoleSnake
+namespace ConsoleSnake.Model
 {
     internal class Snake
     {
         public Direction Direction = Direction.Right;
-        public List<Position> Positions =
-            new List<Position>()
-            {
-                new Position(10, 10),
-                new Position(10, 10),
-                new Position(10, 10)
-            };
+        public List<Position> Positions;
+
+        public Snake()
+        {
+            ResetPositions();
+        }
 
         public Position HeadPosition
         {
@@ -23,6 +19,17 @@ namespace ConsoleSnake
             {
                 return Positions[0];
             }
+        }
+
+        internal void ResetPositions()
+        {
+            Positions = 
+            new List<Position>()
+            {
+                new Position(10, 10),
+                new Position(10, 10),
+                new Position(10, 10)
+            };
         }
 
         internal void Grow()
